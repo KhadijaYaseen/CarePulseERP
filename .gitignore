@@ -1,0 +1,13 @@
+﻿## .NET Core & Visual Studio
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vscode/
+.idea/
+*.log
+Thumbs.db
+.DS_Store
