@@ -1,22 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarePulse MediCore — Enterprise Hospital Security Gateway</title>
+  <title>CarePulse MediCore — Staff Security Portal</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
@@ -24,64 +23,44 @@
             mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            hospital: {
-              950: '#030712',
-              900: '#08101e',
-              850: '#0c172c',
-              800: '#11203d',
-              700: '#192e54',
-            },
-            cyan: {
-              300: '#67e8f9',
-              400: '#22d3ee',
-              500: '#06b6d4',
-              600: '#0891b2',
+            brand: {
+              50: '#EFF6FF',
+              600: '#2563EB',
+              700: '#1D4ED8',
             }
           }
         }
       }
     }
   </script>
-
-  <style>
-    .glass-card {
-      background: rgba(12, 23, 44, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(6, 182, 212, 0.2);
-      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
-    }
-  </style>
 </head>
-<body class="bg-hospital-950 text-slate-200 font-sans min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex items-center justify-center p-4">
 
-  <!-- Background Decorative Glowing Orbs -->
-  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-  <div class="w-full max-w-md relative z-10 space-y-6">
+  <div class="w-full max-w-md space-y-6">
     
     <!-- Brand Header -->
     <div class="text-center space-y-2">
-      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-xl shadow-cyan-500/30 text-hospital-950">
-        <i data-lucide="cross" class="w-8 h-8"></i>
+      <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-brand-600 text-white shadow-md shadow-brand-600/20">
+        <i data-lucide="cross" class="w-6 h-6"></i>
       </div>
-      <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">CarePulse MediCore</h1>
-      <p class="text-xs text-cyan-300 font-mono">Enterprise Hospital ERP &bull; Security Gateway</p>
+      <h1 class="text-2xl font-black text-slate-900 tracking-tight">CarePulse MediCore</h1>
+      <p class="text-xs text-slate-500 font-medium">Enterprise Hospital ERP &bull; Staff Authentication</p>
     </div>
 
-    <!-- Login Glass Card -->
-    <div class="glass-card rounded-3xl p-8 border border-cyan-500/30">
+    <!-- Login Card -->
+    <div class="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-lg space-y-4">
       
-      <div class="mb-6 flex items-center justify-between pb-3 border-b border-white/10">
-        <span class="text-xs font-bold text-white uppercase tracking-wider">Hospital Staff Authentication</span>
-        <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono">● Active System</span>
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <span class="text-xs font-bold text-slate-800 uppercase tracking-wider">Clinical Personnel Sign In</span>
+        <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-semibold border border-emerald-200 flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Active
+        </span>
       </div>
 
-      <form id="admin-login-form" class="space-y-4 text-xs">
-        
+      <form id="admin-login-form" onsubmit="handleLogin(event)" class="space-y-4 text-xs">
         <div>
-          <label class="block font-semibold text-slate-300 mb-1">Staff Role / Authorization</label>
-          <select id="login-role" class="w-full px-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-slate-200 focus:outline-none focus:border-cyan-400">
+          <label class="block font-semibold text-slate-700 mb-1">Staff Role</label>
+          <select id="login-role" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-brand-600">
             <option value="Administrator">👑 Hospital Administrator (Full Control)</option>
             <option value="Doctor">👨‍⚕️ Chief Medical Officer / Physician</option>
             <option value="HeadNurse">🩺 Head Nurse / Ward Incharge</option>
@@ -90,78 +69,37 @@
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-300 mb-1">Employee Email / Staff ID</label>
-          <div class="relative">
-            <i data-lucide="mail" class="w-4 h-4 text-slate-500 absolute left-3.5 top-3"></i>
-            <input type="email" id="login-email" required value="admin@carepulse.org" placeholder="e.g. admin@carepulse.org" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
-          </div>
+          <label class="block font-semibold text-slate-700 mb-1">Employee Email / Staff ID</label>
+          <input type="email" id="login-email" required value="admin@carepulse.org" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-brand-600">
         </div>
 
         <div>
-          <label class="block font-semibold text-slate-300 mb-1">Security Password</label>
-          <div class="relative">
-            <i data-lucide="lock" class="w-4 h-4 text-slate-500 absolute left-3.5 top-3"></i>
-            <input type="password" id="login-password" required value="HospitalPass2026!" placeholder="••••••••••••" class="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-hospital-900 border border-cyan-500/20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400">
-          </div>
+          <label class="block font-semibold text-slate-700 mb-1">Security Passcode</label>
+          <input type="password" id="login-pwd" required value="carepulse2026" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-brand-600">
         </div>
 
-        <div class="flex items-center justify-between pt-1 text-[11px]">
-          <label class="flex items-center gap-2 cursor-pointer text-slate-400">
-            <input type="checkbox" checked class="rounded bg-hospital-900 border-cyan-500/30 text-cyan-500 focus:ring-0">
-            <span>Remember terminal</span>
-          </label>
-          <a href="#" class="text-cyan-400 hover:underline">Reset 2FA Token</a>
-        </div>
-
-        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-hospital-950 font-black transition shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 text-xs tracking-wide">
-          <i data-lucide="shield-check" class="w-4 h-4"></i>
-          <span>Authenticate &amp; Launch ERP Dashboard</span>
+        <button type="submit" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-600/20 transition">
+          Sign In to Clinical Workspace
         </button>
-
       </form>
 
-      <!-- Quick Demo Access Credentials -->
-      <div class="mt-6 pt-4 border-t border-white/5 bg-hospital-900/60 p-3 rounded-2xl border border-cyan-500/10 text-[11px] font-mono">
-        <div class="text-slate-400 flex items-center justify-between">
-          <span>Quick Admin Credentials:</span>
-          <span class="text-cyan-300">Pre-filled</span>
-        </div>
-        <div class="mt-1 text-slate-300 flex justify-between">
-          <span>User: <strong class="text-white">admin@carepulse.org</strong></span>
-          <span>Pass: <strong class="text-white">HospitalPass2026!</strong></span>
-        </div>
+      <div class="pt-2 text-center">
+        <a href="index.html" class="text-xs font-semibold text-brand-600 hover:underline flex items-center justify-center gap-1">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Direct to Clinical Dashboard</span>
+        </a>
       </div>
 
-    </div>
-
-    <!-- Security & Compliance Footer -->
-    <div class="text-center text-[11px] font-mono text-slate-500 space-y-1">
-      <div>🔒 256-Bit Encrypted EMR &bull; HIPAA &amp; ISO-27001 Compliant</div>
-      <div>CarePulse MediCore ERP &bull; Hospital Wing Alpha</div>
     </div>
 
   </div>
 
   <script>
     lucide.createIcons();
-
-    // Login Form Handler
-    document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+    function handleLogin(e) {
       e.preventDefault();
-      const role = document.getElementById('login-role').value;
-      const email = document.getElementById('login-email').value;
-
-      // Store authenticated session
-      localStorage.setItem('carepulse_auth', JSON.stringify({
-        authenticated: true,
-        user: email,
-        role: role,
-        loginTime: new Date().toISOString()
-      }));
-
-      // Redirect directly to the dashboard
-      window.location.href = 'index.html';
-    });
+      window.location.href = "index.html";
+    }
   </script>
 </body>
 </html>
